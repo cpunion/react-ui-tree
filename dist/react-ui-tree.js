@@ -10,12 +10,14 @@ module.exports = React.createClass({
   propTypes: {
     tree: React.PropTypes.object.isRequired,
     paddingLeft: React.PropTypes.number,
+    disableDragging: React.PropTypes.bool,
     renderNode: React.PropTypes.func.isRequired
   },
 
   getDefaultProps: function getDefaultProps() {
     return {
-      paddingLeft: 20
+      paddingLeft: 20,
+      disableDragging: false
     };
   },
   getInitialState: function getInitialState() {
@@ -81,7 +83,7 @@ module.exports = React.createClass({
         index: tree.getIndex(1),
         key: 1,
         paddingLeft: this.props.paddingLeft,
-        onDragStart: this.dragStart,
+        onDragStart: !this.props.disableDragging && this.dragStart,
         onCollapse: this.toggleCollapse,
         dragging: dragging && dragging.id
       })
